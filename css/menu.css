@@ -32,3 +32,10 @@ header .header-texto{
     background-color: #d4dbc7;
     padding: 0 12.5%;
 }
+main{
+    margin: 0 12.5%;
+}
+form .btn{
+    padding-left: 0;
+    padding-right: 0;
+}
