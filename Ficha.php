@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="css/menu.css" rel="stylesheet">
+    <link href="css/ficha.css" rel="stylesheet">
     <title>Ficha RPG</title>
 </head>
 <body>
@@ -21,14 +22,45 @@
 </div>
 <main>
     <form method="post" action="php/regFicha.php">
-        <div id="area-habilidades">
-            <input id="habilidade" name="habilidade[]" type="text">
 
+        <label for="personagem">Personagem:</label>
+        <input type="text" id="personagem" name="personagem" class="form-control mb-3">
+
+        <label for="racas">Raça:</label>
+        <select class="custom-select mb-3" id="racas">
+            <option selected>Escolha...</option>
+            <!-- inicio loop (value recebe id da raca) -->
+            <option value="1">Humano</option>
+            <option value="2">Elfo</option>
+            <option value="3">Anão</option>
+            <!-- fim loop -->
+        </select>
+
+        <label for="classes">Classe:</label>
+        <select class="custom-select mb-3" id="classes">
+            <option selected>Escolha...</option>
+            <!--on change valor da raça -> inicio loop (value recebe id da classe) -->
+            <option value="1">Guerreiro</option>
+            <option value="2">Paladino</option>
+            <option value="3">Ranger</option>
+            <!-- fim loop -->
+        </select>
+        <div class="row">
+            <div id="area-habilidades" class="col-lg-5">
+                <label>Habilidades</label>
+                    <select name="habilidade[]" class="custom-select mb-3">
+                        <option selected>Escolha...</option>
+                        <!--on change valor da classe -> inicio loop (value recebe id da habilidade) -->
+                        <option value="1">Nome habilidade 1</option>
+                        <option value="2">Nome habilidade 2</option>
+                        <option value="3">Nome habilidade 3</option>
+                        <!-- fim loop -->
+                    </select>
+            </div>
         </div>
-
-        <button type="button" onclick="AddAtric()">Botão</button>
+        <button type="button" class="btn btn-outline-danger btn-lg p-3" onclick="AddAtric()">Duplicar</button>
 <br>
-        <button type="submit">Enviar</button>
+        <button type="submit" class="btn btn-outline-success btn-lg p-3">Enviar</button>
     </form>
 </main>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -39,7 +71,7 @@
 
     function AddAtric(){
         var area = $("#area-habilidades");
-        var habilidadeInput = $("#habilidade");
+        var habilidadeInput = area.find("select").last();
         area.append(habilidadeInput.clone());
     }
 </script>
