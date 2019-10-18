@@ -1,0 +1,12 @@
+.teste{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.attr{
+    font-weight: bold;
+}
+.table td, .table tr{
+    vertical-align: middle;
+}

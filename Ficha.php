@@ -22,55 +22,177 @@
 </div>
 <main>
     <form method="post" action="php/regFicha.php">
+        <div class="row mb-3">
+            <div class="col-lg-6">
+                <h3>Personagem</h3>
+                    <label for="imagem">Imagem:</label>
+                    <div class="custom-file mb-3">
+                        <input type="file" accept="image/*" onchange="uploadImage()" class="custom-file-input" id="imagem">
+                        <label class="custom-file-label" id="imgText" for="imagem">Escolha seu arquivo...</label>
+                    </div>
 
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="imagemGroup">Carregue uma imagem:</span>
+
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" class="form-control mb-3">
+
+                <label for="racas">Raça:</label>
+                <select class="custom-select mb-3" id="racas">
+                    <option selected>Escolha...</option>
+                    <!-- inicio loop (value recebe id da raca) -->
+                    <option value="1">Humano</option>
+                    <option value="2">Elfo</option>
+                    <option value="3">Anão</option>
+                    <!-- fim loop -->
+                </select>
+
+                <label for="classes">Classe:</label>
+                <select class="custom-select mb-3" id="classes">
+                    <option selected>Escolha...</option>
+                    <!--on change valor da raça -> inicio loop (value recebe id da classe) -->
+                    <option value="1">Guerreiro</option>
+                    <option value="2">Paladino</option>
+                    <option value="3">Ranger</option>
+                    <!-- fim loop -->
+                </select>
+
             </div>
-            <div class="custom-file">
-                <input type="file" accept="image/*" onchange="uploadImage()" class="custom-file-input" id="imagem" aria-describedby="imagemGroup">
-                <label class="custom-file-label" id="imgText" for="imagem">Choose file</label>
+
+            <div class="col-lg-6">
+                <h3>Atributos</h3>
+                <label for="forca">Força:</label>
+                <div class="teste" id="forca">
+                <input type="range" name="forca" onchange="attrChange('forca');" value="0" class="custom-range mb-3" min="0" max="20">
+                    <span class="ml-4 mb-3 attr">0</span>
+                </div>
+
+                <label for="agilidade">Agilidade:</label>
+                <div class="teste" id="agilidade">
+                    <input type="range" name="agilidade" onchange="attrChange('agilidade');" value="0" class="custom-range mb-3" min="0" max="20">
+                    <span class="ml-4 mb-3 attr">0</span>
+                </div>
+
+                <label for="inteligencia">Inteligência:</label>
+                <div class="teste" id="inteligencia">
+                    <input type="range" name="inteligencia" onchange="attrChange('inteligencia');" value="0" class="custom-range mb-3" min="0" max="20">
+                    <span class="ml-4 mb-3 attr">0</span>
+                </div>
+
+                <label for="vontade">Vontade:</label>
+                <div class="teste" id="vontade">
+                    <input type="range" name="vontade" onchange="attrChange('vontade')" value="0" class="custom-range mb-3" min="0" max="20">
+                    <span class="ml-4 mb-3 attr">0</span>
+                </div>
             </div>
         </div>
 
-        <img id="img" src="#"><br>
+        <div class="row mb-3">
+            <div class="col-lg-4">
+                
+            </div>
 
-        <label for="personagem">Personagem:</label>
-        <input type="text" id="personagem" name="personagem" class="form-control mb-3">
+            <div class="col-lg-4">
+                <div id="area-armas">
+                    <h3>Armas</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Dano</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select name="armas[]" class="custom-select">
+                                        <option selected>Escolha...</option>
+                                        <!--on change valor da classe -> inicio loop (value recebe id da habilidade) -->
+                                        <option value="1">Nome arma 1</option>
+                                        <option value="2">Nome arma 2</option>
+                                        <option value="3">Nome arma 3</option>
+                                        <!-- fim loop -->
+                                    </select>
+                                </td>
+                                <td>
+                                    <span>00</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="btn btn-outline-danger btn-block p-2" onclick="AddAtrib('area-armas')">+ Armas</button>
+            </div>
 
-        <label for="racas">Raça:</label>
-        <select class="custom-select mb-3" id="racas">
-            <option selected>Escolha...</option>
-            <!-- inicio loop (value recebe id da raca) -->
-            <option value="1">Humano</option>
-            <option value="2">Elfo</option>
-            <option value="3">Anão</option>
-            <!-- fim loop -->
-        </select>
+            <div class="col-lg-4">
+                <div id="area-armaduras">
+                    <h3>Armaduras</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Defesa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select name="armaduras[]" class="custom-select">
+                                        <option selected>Escolha...</option>
+                                        <!--on change valor da classe -> inicio loop (value recebe id da habilidade) -->
+                                        <option value="1">Nome equipamento 1</option>
+                                        <option value="2">Nome equipamento 2</option>
+                                        <option value="3">Nome equipamento 3</option>
+                                        <!-- fim loop -->
+                                    </select>
+                                </td>
+                                <td>
+                                    <span>00</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="btn btn-outline-danger btn-block p-2" onclick="AddAtrib('area-armaduras')">+ Armaduras</button>
+            </div>
 
-        <label for="classes">Classe:</label>
-        <select class="custom-select mb-3" id="classes">
-            <option selected>Escolha...</option>
-            <!--on change valor da raça -> inicio loop (value recebe id da classe) -->
-            <option value="1">Guerreiro</option>
-            <option value="2">Paladino</option>
-            <option value="3">Ranger</option>
-            <!-- fim loop -->
-        </select>
-        <div class="row">
-            <div id="area-habilidades" class="col-lg-5">
-                <label>Habilidades</label>
-                    <select name="habilidade[]" class="custom-select mb-3">
-                        <option selected>Escolha...</option>
-                        <!--on change valor da classe -> inicio loop (value recebe id da habilidade) -->
-                        <option value="1">Nome habilidade 1</option>
-                        <option value="2">Nome habilidade 2</option>
-                        <option value="3">Nome habilidade 3</option>
-                        <!-- fim loop -->
-                    </select>
+        </div>
+        <div class="row mb-3">
+            <div class="col-lg-12">
+                <div id="area-habilidades">
+                    <h3>Habilidades</h3>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Tipo</th>
+                            <th>Mana</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <select name="habilidades[]" class="custom-select">
+                                    <option selected>Escolha...</option>
+                                    <!--on change valor da classe -> inicio loop (value recebe id da habilidade) -->
+                                    <option value="1">Nome habilidade 1</option>
+                                    <option value="2">Nome habilidade 2</option>
+                                    <option value="3">Nome habilidade 3</option>
+                                    <!-- fim loop -->
+                                </select>
+                            </td>
+                            <td>
+                                <span>Ativa</span>
+                            </td>
+                            <td>
+                                <span>00</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="btn btn-outline-danger btn-block p-2" onclick="AddAtrib('area-habilidades')">+ Habilidades</button>
             </div>
         </div>
-        <button type="button" class="btn btn-outline-danger btn-lg p-3" onclick="AddAtric()">Duplicar</button>
+
 <br>
         <button type="submit" class="btn btn-outline-success btn-lg p-3">Enviar</button>
     </form>
@@ -81,10 +203,10 @@
 <script src="js/jquery-3.4.1.js"></script>
 <script>
 
-    function AddAtric(){
-        var area = $("#area-habilidades");
-        var habilidadeInput = area.find("select").last();
-        area.append(habilidadeInput.clone());
+    function AddAtrib($div){
+        var area = $("#"+$div).find("tbody");
+        var areaInput = area.find("tr").last();
+        area.append(areaInput.clone());
     }
 
     function uploadImage(){
@@ -93,7 +215,12 @@
         var nomeImg = $("#imgText");
         var nome = imgField.split("\\");
         nomeImg.text(nome[nome.length-1]);
-        $("#img").attr("src", imgField);
+    }
+
+    function attrChange($nome){
+        var atrBox = $("#"+$nome);
+        var atr = atrBox.find("input").val();
+        atrBox.find("span").text(atr);
     }
 </script>
 </body>
