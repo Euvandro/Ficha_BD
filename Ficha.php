@@ -23,6 +23,18 @@
 <main>
     <form method="post" action="php/regFicha.php">
 
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="imagemGroup">Carregue uma imagem:</span>
+            </div>
+            <div class="custom-file">
+                <input type="file" accept="image/*" onchange="uploadImage()" class="custom-file-input" id="imagem" aria-describedby="imagemGroup">
+                <label class="custom-file-label" id="imgText" for="imagem">Choose file</label>
+            </div>
+        </div>
+
+        <img id="img" src="#"><br>
+
         <label for="personagem">Personagem:</label>
         <input type="text" id="personagem" name="personagem" class="form-control mb-3">
 
@@ -73,6 +85,15 @@
         var area = $("#area-habilidades");
         var habilidadeInput = area.find("select").last();
         area.append(habilidadeInput.clone());
+    }
+
+    function uploadImage(){
+
+        var imgField = $("#imagem").val();
+        var nomeImg = $("#imgText");
+        var nome = imgField.split("\\");
+        nomeImg.text(nome[nome.length-1]);
+        $("#img").attr("src", imgField);
     }
 </script>
 </body>
