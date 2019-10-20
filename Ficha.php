@@ -22,7 +22,7 @@
 </div>
 <main>
     <form method="post" action="php/regFicha.php">
-        <div class="row mb-3">
+        <div class="row">
             <div class="col-lg-6">
                 <h3>Personagem</h3>
                     <label for="imagem">Imagem:</label>
@@ -84,10 +84,118 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-3">
+                <span class="attr mb-3">Nivel:</span>
+                <input type="number" name="nivel" class="form-control mb-3" value="0" min="0"/>
+            </div>
+            <div class="col-lg-10 col-md-9">
+                <span class="attr mb-3">Motivação:</span>
+                <input type="text" id="motivacao" name="motivacao" class="form-control mb-3">
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-lg-2 mb-3">
+                <h5>Geral</h5>
+                <div class="row">
+                    <div class="col-md-12 col">
+                        <span class="attr">Experiencia:</span>
+                        <input type="number" name="xp" class="form-control mb-3" value="0" min="0"/>
+                    </div>
+                    <div class="col-md-12 col">
+                        <span class="attr">Gold:</span>
+                        <input type="number" name="gold" class="form-control mb-3" value="0" min="0"/>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-lg-2 mb-3">
+                <h5>Defesa</h5>
+                <div class="row">
+                    <div class="col">
+                      <span class="attr">Bloqueio</span>
+                        <input type="number" name="bloqueio" class="form-control mb-3" value="0" min="0">
+                    </div>
+                    <div class="col">
+                        <span class="attr">Esquiva</span>
+                        <input type="number" name="esquiva" class="form-control mb-3" value="0" min="0">
+                    </div>
+                    <div class="col-lg-12 col">
+                        <span class="attr">Determinação</span>
+                        <input type="number" name="determinacao" class="form-control mb-3" value="0" min="0">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 mb-3">
+                <h5>Carga</h5>
+                <div class="row">
+
+                    <div class="col">
+                        <span class="attr">Básica</span>
+                        <input type="number" name="carga_basica" class="form-control mb-3" value="0" min="0">
+                    </div>
+                    <div class="col">
+                        <span class="attr">Pesada</span>
+                        <input type="number" name="carga_pesada" class="form-control mb-3" value="0" min="0">
+                    </div>
+                    <div class="col-lg-12 col">
+                        <span class="attr">Máxima</span>
+                        <input type="number" name="carga_maxima" class="form-control mb-3" value="0" min="0">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 status">
+                <h5>Status</h5>
+                <span class="attr mb-3">Vida:</span>
+                <div class="teste mb-3" id="vida">
+                    <input type="range" id="rangeVida" onchange="statChange(id)" value="60" min="0" max="60"/>
+                    <input type="number" name="vida" id="numberVida" class="form-control ml-2" onchange="statChange(id)" value="60" min="0" max="60"/>
+                </div>
+                <span class="attr mb-3">Mana:</span>
+                <div class="teste mb-3" id="mana">
+                    <input type="range" id="rangeMana" onchange="statChange(id)" value="60" min="0" max="60"/>
+                    <input type="number" name="mana" id="numberVida" class="form-control ml-2" onchange="statChange(id)" value="60" min="0" max="60">
+                </div>
+            </div>
+
+        </div>
 
         <div class="row mb-3">
             <div class="col-lg-4">
-                
+                <div id="area-equipamentos">
+                    <h3>Equipamentos</h3>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Valor</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <select name="equipamentos[]" onchange="" class="custom-select ola">
+                                    <option selected>Escolha...</option>
+                                    <!--on change valor da classe -> inicio loop (value recebe id da habilidade) -->
+                                    <option value="1">Nome equipamento 1</option>
+                                    <option value="2">Nome equipamento 2</option>
+                                    <option value="3">Nome equipamento 3</option>
+                                    <!-- fim loop -->
+                                </select>
+
+                            </td>
+                            <td>
+                                <span>00</span>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="btn btn-outline-danger btn-block p-2" onclick="AddAtrib('area-equipamentos')">+ Equipamentos</button>
             </div>
 
             <div class="col-lg-4">
@@ -103,7 +211,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <select name="armas[]" class="custom-select">
+                                    <select name="armas[]" onchange="armaValueChange(this)" class="custom-select ola">
                                         <option selected>Escolha...</option>
                                         <!--on change valor da classe -> inicio loop (value recebe id da habilidade) -->
                                         <option value="1">Nome arma 1</option>
@@ -111,11 +219,13 @@
                                         <option value="3">Nome arma 3</option>
                                         <!-- fim loop -->
                                     </select>
+
                                 </td>
                                 <td>
                                     <span>00</span>
                                 </td>
                             </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -135,12 +245,12 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <select name="armaduras[]" class="custom-select">
+                                    <select name="armaduras[]" onchange="" class="custom-select">
                                         <option selected>Escolha...</option>
                                         <!--on change valor da classe -> inicio loop (value recebe id da habilidade) -->
-                                        <option value="1">Nome equipamento 1</option>
-                                        <option value="2">Nome equipamento 2</option>
-                                        <option value="3">Nome equipamento 3</option>
+                                        <option value="1">Nome armadura 1</option>
+                                        <option value="2">Nome armadura 2</option>
+                                        <option value="3">Nome armadura 3</option>
                                         <!-- fim loop -->
                                     </select>
                                 </td>
@@ -163,6 +273,7 @@
                         <thead>
                         <tr>
                             <th>Nome</th>
+                            <th>Descrição</th>
                             <th>Tipo</th>
                             <th>Mana</th>
                         </tr>
@@ -178,6 +289,9 @@
                                     <option value="3">Nome habilidade 3</option>
                                     <!-- fim loop -->
                                 </select>
+                            </td>
+                            <td style="width: 50%">
+                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab consequatur culpa dolorem eaque est eum facilis itaque laudantium magnam modi molestias odio perspiciatis quae, sequi unde, voluptas, voluptates. Aliquid, consequuntur!</span>
                             </td>
                             <td>
                                 <span>Ativa</span>
@@ -202,6 +316,18 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="js/jquery-3.4.1.js"></script>
 <script>
+
+    function armaValueChange(obj){
+        $(obj).parent().next().find("span").load("php/armaSelectValue.php", {iden: obj.value});
+    }
+    function statChange($id){
+        var idd = $("#"+$id);
+        if(idd.attr('type')=='range'){
+            idd.next().val(idd.val());
+        }else{
+            idd.prev().val(idd.val());
+        }
+    }
 
     function AddAtrib($div){
         var area = $("#"+$div).find("tbody");
