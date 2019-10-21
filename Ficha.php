@@ -172,6 +172,7 @@
                         <tr>
                             <th scope="col">Nome</th>
                             <th scope="col">Valor</th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -190,6 +191,9 @@
                             <td>
                                 <span>00</span>
                             </td>
+                            <td>
+                                <button type="button" onclick="btnRemover(this)" disabled class="btn btn-outline-danger pl-2 pr-2">-</button>
+                            </td>
                         </tr>
 
                         </tbody>
@@ -206,6 +210,7 @@
                             <tr>
                                 <th scope="col">Nome</th>
                                 <th scope="col">Dano</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -224,6 +229,9 @@
                                 <td>
                                     <span>00</span>
                                 </td>
+                                <td>
+                                    <button type="button" onclick="btnRemover(this)" disabled class="btn btn-outline-danger pl-2 pr-2">-</button>
+                                </td>
                             </tr>
 
                         </tbody>
@@ -240,6 +248,7 @@
                             <tr>
                                 <th scope="col">Nome</th>
                                 <th scope="col">Defesa</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -256,6 +265,9 @@
                                 </td>
                                 <td>
                                     <span>00</span>
+                                </td>
+                                <td>
+                                    <button type="button" onclick="btnRemover(this)" disabled class="btn btn-outline-danger pl-2 pr-2">-</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -276,6 +288,7 @@
                             <th>Descrição</th>
                             <th>Tipo</th>
                             <th>Mana</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -299,6 +312,9 @@
                             <td>
                                 <span>00</span>
                             </td>
+                            <td>
+                                <button type="button" onclick="btnRemover(this)" disabled class="btn btn-outline-danger pl-2 pr-2">-</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -317,6 +333,13 @@
 <script src="js/jquery-3.4.1.js"></script>
 <script>
 
+    function btnRemover(obj){
+        if(confirm("Tem certeza que quer excluir esse quipamento?")) {
+            alert($(obj).parent().parent().find("select").val() +" passar como parametro para um arquivo php para dar um delete nesse id ");
+            $(obj).parent().parent().remove();
+        }
+    }
+
     function armaValueChange(obj){
         $(obj).parent().next().find("span").load("php/armaSelectValue.php", {iden: obj.value});
     }
@@ -332,7 +355,9 @@
     function AddAtrib($div){
         var area = $("#"+$div).find("tbody");
         var areaInput = area.find("tr").last();
-        area.append(areaInput.clone());
+        var clone = areaInput.clone();
+        area.append(clone);
+        clone.find("button").prop('disabled', false);
     }
 
     function uploadImage(){
