@@ -157,7 +157,7 @@
                 <span class="attr mb-3">Mana:</span>
                 <div class="teste mb-3" id="mana">
                     <input type="range" id="rangeMana" onchange="statChange(id)" value="60" min="0" max="60"/>
-                    <input type="number" name="mana" id="numberVida" class="form-control ml-2" onchange="statChange(id)" value="60" min="0" max="60">
+                    <input type="number" name="mana" id="numberMana" class="form-control ml-2" onchange="statChange(id)" value="60" min="0" max="60">
                 </div>
             </div>
 
