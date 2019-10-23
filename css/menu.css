@@ -5,6 +5,15 @@ body {
 body {
     background-color: #f5f5f5;
 }
+.teste{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.w100{
+    width: 100%;
+}
 header{
     display: -ms-flexbox;
     display: flex;
@@ -29,7 +38,7 @@ header .header-texto{
 }
 .id-bar-user{
     text-align: right;
-    background-color: #d4dbc7;
+    background-color: #F8F9FA;
     padding: 0 12.5%;
 }
 main{

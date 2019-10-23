@@ -72,7 +72,7 @@ $row = mysqli_fetch_assoc($result);
                     <input type="text" name="nome" class="form-control mb-3">
                 </div>
                 <div class="col">
-                    <label for="nome">Custo:</label>
+                    <label for="custo">Custo:</label>
                     <input type="number" name="custo" class="form-control mb-3">
                 </div>
             </div>

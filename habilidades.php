@@ -1,4 +1,24 @@
-<!doctype html>
+<?php
+include 'php/db.php';
+
+?>
+<?php
+/*
+session_start();
+$id_user=$_SESSION['id_user'];
+if(!isset($_SESSION['usuario']) || !isset($_SESSION["senha"])){
+    header("Location: index.html");
+    exit;
+}else{
+}
+*/
+?>
+<?php
+$mysqli = "SELECT * FROM armas LIMIT 100";
+$result = mysqli_query($conn,$mysqli);
+$row = mysqli_fetch_assoc($result);
+
+?>
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8">
@@ -21,9 +41,58 @@
     <p>@Usuario <a href="#">Logout</a></p>
 </div>
 <main>
+    <h2 class="mb-3">Habilidades</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Tipo</th>
+            <th>Mana</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        do {
+            ?>
+            <tr>
+                <td><?= $row['Nome'] ?></td>
+                <td><?= $row['Dano'] ?></td>
+                <td><?= $row['Dano'] ?></td>
+                <td><?= $row['Dano'] ?></td>
+            </tr>
+        <?php
+        }while ($row = mysqli_fetch_assoc($result));
+        ?>
+        </tbody>
+    </table>
 
 
-    <form method="post" action="php/regFicha.php">
+    <form method="post" action="">
+        <h3>Novo</h3>
+        <div class="row">
+            <div class="col">
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" class="form-control mb-3">
+            </div>
+            <div class="col-2">
+                <label for="tipo">Tipo:</label>
+                <input type="text" name="tipo" class="form-control mb-3">
+            </div>
+            <div class="col-1">
+                <label for="mana">Mana:</label>
+                <input type="text" name="mana" class="form-control mb-3">
+            </div>
+            <div class="col-12">
+                <label for="descricao">Descrição:</label>
+                <textarea name="descricao" class="form-control mb-3" rows="5"></textarea>
+            </div>
+        </div>
+
+
+
+
+        <button type="submit" class="btn btn-outline-success btn-block">Enviar</button>
     </form>
 
 </main>
