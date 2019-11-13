@@ -2,21 +2,35 @@
 include 'db.php';
 
 $email = $_POST['email'];
-$senha_digitada = $_POST['senha'];
+$senha = $_POST['senha'];
 
-$mysqli = "SELECT * FROM usuario WHERE email = '$email'";
+$mysqli = "SELECT id_usuario, usuario, email, senha FROM usuario WHERE email = '$email'";
 if($result = mysqli_query($conn, $mysqli)){
+
     $linha = mysqli_fetch_assoc($result);
+    $senha_cript = $linha['senha'];
 
-    $senha_guardada = $linha['senha'];
-    echo "Senha digitada: ".$senha_digitada
-        ."<br>Senha no banco: ".$senha_guardada;
-
-    if(crypt($senha_digitada, $senha_guardada) === $senha_guardada){
-        echo "Senha confere";
-    }else{
-        echo "Senha nao confere";
+    if (md5($senha)==$senha_cript) {
+        mysqli_close($conn);
+        session_start();
+        $_SESSION['usuario']=$linha['usuario'];
+        $_SESSION['id_usuario']=$linha['id_usuario'];
+        echo"
+";
+        header("Location: ../menu.php");
+    } else {
+        mysqli_close($conn);
+        echo ("<script LANGUAGE='JavaScript'>
+    window.alert('E-mail ou senha incorretos');
+    window.location.href='../index.html';
+    </script>");
     }
+}else{
+    mysqli_close($conn);
+    echo ("<script LANGUAGE='JavaScript'>
+    window.alert('Ocorreu um erro na requisicao');
+    window.location.href='../registrar.html';
+    </script>");
 }
 /*$linha = mysql_fetch_assoc($mysqli);
 $row = mysql_num_rows($sql);
@@ -25,7 +39,6 @@ $row = mysql_num_rows($sql);
 if($row>0){
     session_start();
     $_SESSION['usuario']=$linha['user'];
-    $_SESSION['senha']=$linha['password'];
     $_SESSION['id_user']=$linha['id'];
     echo"
 ";

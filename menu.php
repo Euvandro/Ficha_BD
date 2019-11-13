@@ -1,3 +1,15 @@
+<?php
+include 'php/db.php';
+
+session_start();
+$id_usuario = $_SESSION['id_usuario'];
+$usuario = $_SESSION['usuario'];
+
+if(!isset($_SESSION['usuario'])){
+    header("Location: index.html");
+    exit;
+}
+?>
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -18,7 +30,9 @@
     </div>
 </header>
 <div class="id-bar-user teste">
-
+    <?php
+        if($usuario === 'evandroao'){
+    ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Alterna navegação">
             <span class="navbar-toggler-icon"></span>
@@ -26,7 +40,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">Menu</a>
+                    <a class="nav-link" href="menu.php">Menu</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="armas.php">Armas</a>
@@ -50,11 +64,13 @@
             </ul>
         </div>
     </nav>
-
+    <?php
+        }
+    ?>
     <nav class="navbar w100">
         <ul class="navbar-nav w100">
             <li class="nav-item">
-                <a class="nav-link" href="">@Usuario Logout</a>
+                <span class="nav-link " href=""><?= $usuario ?> <a href="php/logout.php">Logout</a></span>
             </li>
         </ul>
     </nav>

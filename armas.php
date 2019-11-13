@@ -1,20 +1,16 @@
 <?php
 include 'php/db.php';
 
-?>
-<?php
-/*
 session_start();
-$id_user=$_SESSION['id_user'];
-if(!isset($_SESSION['usuario']) || !isset($_SESSION["senha"])){
+$id_usuario = $_SESSION['id_usuario'];
+$usuario = $_SESSION['usuario'];
+
+if(!isset($_SESSION['usuario'])){
     header("Location: index.html");
     exit;
-}else{
 }
-*/
-?>
-<?php
-$mysqli = "SELECT * FROM armas LIMIT 100";
+
+$mysqli = "SELECT * FROM arma LIMIT 100";
 $result = mysqli_query($conn,$mysqli);
 $row = mysqli_fetch_assoc($result);
 
