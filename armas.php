@@ -10,7 +10,7 @@ if(!isset($_SESSION['usuario'])){
     exit;
 }
 
-$mysqli = "SELECT * FROM arma LIMIT 100";
+$mysqli = "SELECT e.nome, a.dano FROM arma as a,  equipamento as e where a.id_equipamento=e.id_equipamento LIMIT 100;";
 $result = mysqli_query($conn,$mysqli);
 $row = mysqli_fetch_assoc($result);
 
@@ -34,7 +34,7 @@ $row = mysqli_fetch_assoc($result);
     </div>
 </header>
 <div class="id-bar-user">
-    <p>@Usuario <a href="#">Logout</a></p>
+    <p>@Usuario <a href="php/logout.php">Logout</a></p>
 </div>
 <main>
     <h2 class="mb-3">Armas</h2>
@@ -50,8 +50,8 @@ $row = mysqli_fetch_assoc($result);
         do {
             ?>
             <tr>
-                <td><?= $row['Nome'] ?></td>
-                <td><?= $row['Dano'] ?></td>
+                <td><?= $row['nome'] ?></td>
+                <td><?= $row['dano'] ?></td>
             </tr>
         <?php
         }while ($row = mysqli_fetch_assoc($result));
@@ -60,7 +60,7 @@ $row = mysqli_fetch_assoc($result);
     </table>
 
 
-    <form method="post" action="">
+    <form method="post" action="php/insercoes/inserirArma.php">
         <h3>Novo</h3>
         <div class="row">
             <div class="col">
@@ -69,12 +69,9 @@ $row = mysqli_fetch_assoc($result);
             </div>
             <div class="col">
                 <label for="armas">Dano:</label>
-                <input type="number" name="armas" class="form-control mb-3">
+                <input type="number" name="dano" class="form-control mb-3">
             </div>
         </div>
-
-
-
 
         <button type="submit" class="btn btn-outline-success btn-block">Enviar</button>
     </form>
