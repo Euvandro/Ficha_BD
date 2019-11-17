@@ -49,7 +49,7 @@ if(!isset($_SESSION['usuario'])){
                     <a class="nav-link" href="armaduras.php">Armaduras</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="equipamentos.php">Equipamentos</a>
+                    <a class="nav-link" href="utilitarios.php">Equipamentos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="habilidades.php">Habilidades</a>

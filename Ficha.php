@@ -1,3 +1,39 @@
+<?php
+include 'php/db.php';
+
+session_start();
+$id_usuario = $_SESSION['id_usuario'];
+$usuario = $_SESSION['usuario'];
+
+if(!isset($_SESSION['usuario'])){
+    header("Location: index.html");
+    exit;
+}
+
+$mysqliHabilidade = "SELECT * FROM habilidade ORDER BY nome ASC;";
+$resultadoHabilidade = mysqli_query($conn,$mysqliHabilidade);
+$linhaHabilidade = mysqli_fetch_assoc($resultadoHabilidade);
+
+$mysqliRaca = "SELECT * FROM raca ORDER BY nome ASC";
+$resultadoRaca = mysqli_query($conn, $mysqliRaca);
+$linhaRaca = mysqli_fetch_assoc($resultadoRaca);
+
+$mysqliClasse = "SELECT * FROM classe ORDER BY nome ASC";
+$resultadoClasse = mysqli_query($conn, $mysqliClasse);
+$linhaClasse = mysqli_fetch_assoc($resultadoClasse);
+
+$mysqliArma = "SELECT e.id_equipamento, e.nome FROM equipamento as e, arma as a WHERE e.id_equipamento = a.id_equipamento ORDER BY nome ASC";
+$resultadoArma = mysqli_query($conn, $mysqliArma);
+$linhaArma = mysqli_fetch_assoc($resultadoArma);
+
+$mysqliUtilitario = "SELECT e.id_equipamento, e.nome FROM equipamento as e, utilitario as u WHERE e.id_equipamento = u.id_equipamento ORDER BY nome ASC";
+$resultadoUtilitario = mysqli_query($conn, $mysqliUtilitario);
+$linhaUtilitario = mysqli_fetch_assoc($resultadoUtilitario);
+
+$mysqliArmadura = "SELECT e.id_equipamento, e.nome FROM equipamento as e, armadura as a WHERE e.id_equipamento = a.id_equipamento ORDER BY nome ASC";
+$resultadoArmadura = mysqli_query($conn, $mysqliArmadura);
+$linhaArmadura = mysqli_fetch_assoc($resultadoArmadura);
+?>
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -21,13 +57,13 @@
     <p>@Usuario <a href="#">Logout</a></p>
 </div>
 <main>
-    <form method="post" action="php/regFicha.php">
+    <form method="post" action="php/regFicha.php" enctype="multipart/form-data">
         <div class="row">
             <div class="col-lg-6">
                 <h3>Personagem</h3>
                     <label for="imagem">Imagem:</label>
                     <div class="custom-file mb-3">
-                        <input type="file" accept="image/*" onchange="uploadImage()" class="custom-file-input" id="imagem">
+                        <input type="file" accept="image/*" onchange="uploadImage()" class="custom-file-input" name="imagem" id="imagem">
                         <label class="custom-file-label" id="imgText" for="imagem">Escolha seu arquivo...</label>
                     </div>
 
@@ -36,22 +72,20 @@
                 <input type="text" id="nome" name="nome" class="form-control mb-3">
 
                 <label for="racas">Raça:</label>
-                <select class="custom-select mb-3" id="racas">
-                    <option selected>Escolha...</option>
+                <select class="custom-select mb-3" id="racas" name="raca" onchange="carregaHabilidade()">
                     <!-- inicio loop (value recebe id da raca) -->
-                    <option value="1">Humano</option>
-                    <option value="2">Elfo</option>
-                    <option value="3">Anão</option>
+                    <?php do{ ?>
+                        <option value="<?= $linhaRaca['id_raca'] ?>"><?= $linhaRaca['nome'] ?></option>
+                    <?php }while($linhaRaca = mysqli_fetch_assoc($resultadoRaca)); ?>
                     <!-- fim loop -->
                 </select>
 
                 <label for="classes">Classe:</label>
-                <select class="custom-select mb-3" id="classes">
-                    <option selected>Escolha...</option>
+                <select class="custom-select mb-3" id="classes" name="classe" onchange="carregaHabilidade()">
                     <!--on change valor da raça -> inicio loop (value recebe id da classe) -->
-                    <option value="1">Guerreiro</option>
-                    <option value="2">Paladino</option>
-                    <option value="3">Ranger</option>
+                    <?php do{ ?>
+                        <option value="<?= $linhaClasse['id_classe'] ?>"><?= $linhaClasse['nome'] ?></option>
+                    <?php }while($linhaClasse = mysqli_fetch_assoc($resultadoClasse)); ?>
                     <!-- fim loop -->
                 </select>
 
@@ -166,7 +200,7 @@
         <div class="row mb-3">
             <div class="col-lg-4">
                 <div id="area-equipamentos">
-                    <h3>Equipamentos</h3>
+                    <h3>Utilitarios</h3>
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -178,12 +212,12 @@
                         <tbody>
                         <tr>
                             <td>
-                                <select name="equipamentos[]" onchange="" class="custom-select ola">
+                                <select name="equipamentos[]" onchange="utilitarioValueChange(this)" class="custom-select ola">
                                     <option selected>Escolha...</option>
                                     <!--on change valor da classe -> inicio loop (value recebe id da habilidade) -->
-                                    <option value="1">Nome equipamento 1</option>
-                                    <option value="2">Nome equipamento 2</option>
-                                    <option value="3">Nome equipamento 3</option>
+                                    <?php do{ ?>
+                                        <option value="<?= $linhaUtilitario['id_equipamento'] ?>"><?= $linhaUtilitario['nome'] ?></option>
+                                    <?php }while($linhaUtilitario = mysqli_fetch_assoc($resultadoUtilitario)); ?>
                                     <!-- fim loop -->
                                 </select>
 
@@ -216,12 +250,12 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <select name="armas[]" onchange="armaValueChange(this)" class="custom-select ola">
+                                    <select name="equipamentos[]" onchange="armaValueChange(this)" class="custom-select ola">
                                         <option selected>Escolha...</option>
                                         <!--on change valor da classe -> inicio loop (value recebe id da habilidade) -->
-                                        <option value="1">Nome arma 1</option>
-                                        <option value="2">Nome arma 2</option>
-                                        <option value="3">Nome arma 3</option>
+                                        <?php do{ ?>
+                                            <option value="<?= $linhaArma['id_equipamento'] ?>"><?= $linhaArma['nome'] ?></option>
+                                        <?php }while($linhaArma = mysqli_fetch_assoc($resultadoArma)); ?>
                                         <!-- fim loop -->
                                     </select>
 
@@ -254,12 +288,12 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <select name="armaduras[]" onchange="" class="custom-select">
+                                    <select name="equipamentos[]" onchange="armaduraValueChange(this)" class="custom-select">
                                         <option selected>Escolha...</option>
                                         <!--on change valor da classe -> inicio loop (value recebe id da habilidade) -->
-                                        <option value="1">Nome armadura 1</option>
-                                        <option value="2">Nome armadura 2</option>
-                                        <option value="3">Nome armadura 3</option>
+                                        <?php do{ ?>
+                                            <option value="<?= $linhaArmadura['id_equipamento'] ?>"><?= $linhaArmadura['nome'] ?></option>
+                                        <?php }while($linhaArmadura = mysqli_fetch_assoc($resultadoArmadura)); ?>
                                         <!-- fim loop -->
                                     </select>
                                 </td>
@@ -286,7 +320,6 @@
                         <tr>
                             <th>Nome</th>
                             <th>Descrição</th>
-                            <th>Tipo</th>
                             <th>Mana</th>
                             <th></th>
                         </tr>
@@ -294,23 +327,18 @@
                         <tbody>
                         <tr>
                             <td>
-                                <select name="habilidades[]" class="custom-select">
+                                <select name="habilidades[]" class="custom-select ListaHabilidades" onchange="carregaDadosHabilidade(this)">
                                     <option selected>Escolha...</option>
                                     <!--on change valor da classe -> inicio loop (value recebe id da habilidade) -->
-                                    <option value="1">Nome habilidade 1</option>
-                                    <option value="2">Nome habilidade 2</option>
-                                    <option value="3">Nome habilidade 3</option>
+
                                     <!-- fim loop -->
                                 </select>
                             </td>
                             <td style="width: 50%">
-                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab consequatur culpa dolorem eaque est eum facilis itaque laudantium magnam modi molestias odio perspiciatis quae, sequi unde, voluptas, voluptates. Aliquid, consequuntur!</span>
+                                <span></span>
                             </td>
                             <td>
-                                <span>Ativa</span>
-                            </td>
-                            <td>
-                                <span>00</span>
+                                <span></span>
                             </td>
                             <td>
                                 <button type="button" onclick="btnRemover(this)" disabled class="btn btn-outline-danger pl-2 pr-2">-</button>
@@ -341,7 +369,22 @@
     }
 
     function armaValueChange(obj){
-        $(obj).parent().next().find("span").load("php/armaSelectValue.php", {iden: obj.value});
+        $(obj).parent().next().find("span").load("php/ajax/armaSelectValue.php", {iden: obj.value});
+    }
+    function utilitarioValueChange(obj){
+        $(obj).parent().next().find("span").load("php/ajax/utilitarioSelectValue.php", {iden: obj.value});
+    }
+    function armaduraValueChange(obj){
+        $(obj).parent().next().find("span").load("php/ajax/armaduraSelectValue.php", {iden: obj.value});
+    }
+    function carregaHabilidade(){
+        raca = $("#racas").val();
+        classe = $("#classes").val();
+        $(".ListaHabilidades").load("php/ajax/habilidadeSelect.php", {raca: raca, classe: classe})
+    }
+    function carregaDadosHabilidade(obj){
+        $(obj).parent().next().find("span").load("php/ajax/habilidadeDescricaoValue.php", {iden: obj.value});
+        $(obj).parent().next().next().find("span").load("php/ajax/habilidadeManaValue.php", {iden: obj.value});
     }
     function statChange($id){
         var idd = $("#"+$id);
