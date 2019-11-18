@@ -469,11 +469,8 @@ $linhaArmadura = mysqli_fetch_assoc($resultadoArmadura);
                 <?php do{ ?>
                 <tr>
                     <td>
-                        <select name="habilidades[]" class="custom-select ListaHabilidades" onchange="carregaDadosHabilidade(this)">
+                        <select name="habilidades[]" class="custom-select" onchange="carregaDadosHabilidade(this)">
                             <option selected value="<?= $linhaHabilidadesAssociadas['id_habilidade'] ?>"><?= $linhaHabilidadesAssociadas['nome'] ?></option>
-                            <!--on change valor da classe -> inicio loop (value recebe id da habilidade) -->
-
-                            <!-- fim loop -->
                         </select>
                     </td>
                     <td style="width: 50%">

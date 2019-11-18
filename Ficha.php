@@ -400,10 +400,8 @@ $linhaArmadura = mysqli_fetch_assoc($resultadoArmadura);
 <script>
 
     function btnRemover(obj){
-        if(confirm("Tem certeza que quer excluir esse quipamento?")) {
-            alert($(obj).parent().parent().find("select").val() +" passar como parametro para um arquivo php para dar um delete nesse id ");
             $(obj).parent().parent().remove();
-        }
+
     }
 
     function armaValueChange(obj){

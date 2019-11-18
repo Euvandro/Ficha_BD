@@ -12,7 +12,7 @@ if(!isset($_SESSION['usuario'])){
 mysqli_autocommit($conn, FALSE);
 
 try{
-    $imagem = $_FILES['imagem'];
+    $imagem = $_POST['imagem'];
     $nome = $_POST['nome'];
     $raca = $_POST['raca'];
     $classe = $_POST['classe'];
