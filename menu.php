@@ -17,6 +17,7 @@ INNER JOIN status as s on f.id_status=s.id_status
 WHERE f.id_usuario='$id_usuario'";
 $resultado = mysqli_query($conn, $mysqli);
 $linha = mysqli_fetch_assoc($resultado);
+$numFichas = mysqli_num_rows($resultado);
 ?>
 <!doctype html>
 <html lang="pt-BR">
@@ -103,6 +104,7 @@ $linha = mysqli_fetch_assoc($resultado);
             </button>
         </form>
         <?php
+        if($numFichas>0){
         do{
         ?>
         <form action="visualizaFicha.php" method="post">
@@ -119,6 +121,7 @@ $linha = mysqli_fetch_assoc($resultado);
         </form>
         <?php
         }while($linha = mysqli_fetch_assoc($resultado));
+        }
         ?>
         <!-- fim do loop -->
     </ul>
