@@ -49,8 +49,8 @@ VALUES ('$vida','$mana', '$nivel', '$xp', '$gold', '$bloqueio', '$esquiva', '$de
     mysqli_query($conn, "INSERT INTO atributos(forca, agilidade, inteligencia, vontade) VALUES('$forca', '$agilidade', '$inteligencia', '$vontade')");
     $id_atributos = mysqli_insert_id($conn);
 
-    mysqli_query($conn, "INSERT INTO ficha(nome, id_raca, id_classe, id_usuario, id_status, id_atributos, motivacao)
-VALUES('$nome', '$raca', '$classe', '$id_usuario', '$id_status', '$id_atributos', '$motivacao')");
+    mysqli_query($conn, "INSERT INTO ficha(nome, imagem, id_raca, id_classe, id_usuario, id_status, id_atributos, motivacao)
+VALUES('$nome', '$imagem', '$raca', '$classe', '$id_usuario', '$id_status', '$id_atributos', '$motivacao')");
     $id_ficha = mysqli_insert_id($conn);
 
     foreach($habilidades as $h){
