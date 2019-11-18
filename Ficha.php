@@ -10,10 +10,6 @@ if(!isset($_SESSION['usuario'])){
     exit;
 }
 
-$mysqliHabilidade = "SELECT * FROM habilidade ORDER BY nome ASC;";
-$resultadoHabilidade = mysqli_query($conn,$mysqliHabilidade);
-$linhaHabilidade = mysqli_fetch_assoc($resultadoHabilidade);
-
 $mysqliRaca = "SELECT * FROM raca ORDER BY nome ASC";
 $resultadoRaca = mysqli_query($conn, $mysqliRaca);
 $linhaRaca = mysqli_fetch_assoc($resultadoRaca);
@@ -53,8 +49,51 @@ $linhaArmadura = mysqli_fetch_assoc($resultadoArmadura);
         <h1>Mighty Blade</h1>
     </div>
 </header>
-<div class="id-bar-user">
-    <p>@Usuario <a href="#">Logout</a></p>
+<div class="id-bar-user teste">
+    <?php
+    if($usuario === 'evandroao'){
+        ?>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Alterna navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.php">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="armas.php">Armas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="armaduras.php">Armaduras</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="utilitarios.php">Equipamentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="habilidades.php">Habilidades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="classes.php">Classes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="racas.php">Raças</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    <?php
+    }
+    ?>
+    <nav class="navbar w100">
+        <ul class="navbar-nav w100">
+            <li class="nav-item">
+                <span class="nav-link " href=""><?= $usuario ?> <a href="php/logout.php">Logout</a></span>
+            </li>
+        </ul>
+    </nav>
 </div>
 <main>
     <form method="post" action="php/regFicha.php" enctype="multipart/form-data">

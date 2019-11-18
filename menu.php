@@ -9,6 +9,14 @@ if(!isset($_SESSION['usuario'])){
     header("Location: index.html");
     exit;
 }
+
+$mysqli = "select f.id_ficha, f.nome, r.nome as raca, c.nome as classe, s.nivel FROM ficha as f
+INNER JOIN raca as r on f.id_raca=r.id_raca
+INNER JOIN classe as c on f.id_classe=c.id_classe
+INNER JOIN status as s on f.id_status=s.id_status
+WHERE f.id_usuario='$id_usuario'";
+$resultado = mysqli_query($conn, $mysqli);
+$linha = mysqli_fetch_assoc($resultado);
 ?>
 <!doctype html>
 <html lang="pt-BR">
@@ -91,6 +99,24 @@ if(!isset($_SESSION['usuario'])){
                 </li>
             </button>
         </form>
+        <?php
+        do{
+        ?>
+        <form action="visualizaFicha.php" method="post">
+            <button type="submit" name="id_ficha" value="<?=$linha['id_ficha']?>" class="btn btn-lg btn-block">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col"><?=$linha['nome']?></div>
+                        <div class="col"><?=$linha['raca']?></div>
+                        <div class="col"><?=$linha['classe']?></div>
+                        <div class="col"><?=$linha['nivel']?></div>
+                    </div>
+                </li>
+            </button>
+        </form>
+        <?php
+        }while($linha = mysqli_fetch_assoc($resultado));
+        ?>
         <!-- fim do loop -->
     </ul>
     <a class="btn btn-outline-success btn-lg btn-block" href="ficha.php">Nova Ficha</a>
