@@ -9,6 +9,10 @@ if(!isset($_SESSION['usuario'])){
     header("Location: index.html");
     exit;
 }
+if($usuario != 'evandroao' && $usuario !== 'arissa' && $usuario != 'gabriel'){
+    header("Location: index.html");
+    exit;
+}
 
 $mysqli = "SELECT nome FROM raca ORDER BY nome ASC LIMIT 100";
 $result = mysqli_query($conn,$mysqli);
@@ -27,7 +31,7 @@ $row = mysqli_fetch_assoc($result);
 <body>
 <header>
     <div class="header-logo">
-        <img src="img/logo.png">
+        <h2>Ficha Online</h2>
     </div>
     <div class="header-texto">
         <h1>Mighty Blade</h1>
@@ -36,7 +40,7 @@ $row = mysqli_fetch_assoc($result);
 
 <div class="id-bar-user teste">
     <?php
-    if($usuario === 'evandroao'){
+    if($usuario === 'evandroao' || $usuario === 'arissa' || $usuario === 'gabriel'){
         ?>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Alterna navegação">
@@ -64,6 +68,9 @@ $row = mysqli_fetch_assoc($result);
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="racas.php">Raças</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="estatisticas.php">Estatisticas</a>
                     </li>
 
                 </ul>

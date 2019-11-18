@@ -50,7 +50,6 @@ $resultadoHabilidadesAssociadas = mysqli_query($conn, $mysqliHabilidadesAssociad
 $linhaHabilidadesAssociadas = mysqli_fetch_assoc($resultadoHabilidadesAssociadas);
 
 
-
 $mysqliArma = "SELECT e.id_equipamento, e.nome FROM equipamento as e, arma as a WHERE e.id_equipamento = a.id_equipamento ORDER BY nome ASC";
 $resultadoArma = mysqli_query($conn, $mysqliArma);
 $linhaArma = mysqli_fetch_assoc($resultadoArma);
@@ -77,7 +76,7 @@ $linhaArmadura = mysqli_fetch_assoc($resultadoArmadura);
 <body>
 <header>
     <div class="header-logo">
-        <img src="img/logo.png">
+        <h2>Ficha Online</h2>
     </div>
     <div class="header-texto">
         <h1>Mighty Blade</h1>
@@ -85,7 +84,7 @@ $linhaArmadura = mysqli_fetch_assoc($resultadoArmadura);
 </header>
 <div class="id-bar-user teste">
     <?php
-    if($usuario === 'evandroao'){
+    if($usuario === 'evandroao' || $usuario === 'arissa' || $usuario === 'gabriel'){
         ?>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Alterna navegação">
@@ -114,6 +113,9 @@ $linhaArmadura = mysqli_fetch_assoc($resultadoArmadura);
                     <li class="nav-item">
                         <a class="nav-link" href="racas.php">Raças</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="estatisticas.php">Estatisticas</a>
+                    </li>
 
                 </ul>
             </div>
@@ -132,14 +134,14 @@ $linhaArmadura = mysqli_fetch_assoc($resultadoArmadura);
 <main>
     <form method="post" action="php/alterarFicha.php">
         <div class="row">
-            <div class="col-lg-6">
-                <h3>Personagem</h3>
-                    <label for="imagem">Imagem:</label>
-                    <div class="custom-file mb-3">
-                        <input type="file" accept="image/*" onchange="uploadImage()" class="custom-file-input" name="imagem" id="imagem">
-                        <label class="custom-file-label" id="imgText" for="imagem">Escolha seu arquivo...</label>
-                    </div>
+            <div class="col-lg-3">
 
+                <div class="mb-3">
+                    <img style="max-width: 100%" src="<?= $linha['imagem'] ?>">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h3>Personagem</h3>
 
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" class="form-control mb-3" disabled value="<?= $linha['nome'] ?>">
@@ -156,7 +158,7 @@ $linhaArmadura = mysqli_fetch_assoc($resultadoArmadura);
 
 </div>
 
-<div class="col-lg-6">
+<div class="col-lg-5">
     <h3>Atributos</h3>
     <label for="forca">Força:</label>
     <div class="teste" id="forca">

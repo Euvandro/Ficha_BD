@@ -30,7 +30,7 @@ $linha = mysqli_fetch_assoc($resultado);
 <body>
 <header>
     <div class="header-logo">
-        <img src="img/logo.png">
+        <h2>Ficha Online</h2>
     </div>
     <div class="header-texto">
         <h1>Mighty Blade</h1>
@@ -39,41 +39,44 @@ $linha = mysqli_fetch_assoc($resultado);
 </header>
 <div class="id-bar-user teste">
     <?php
-        if($usuario === 'evandroao'){
-    ?>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Alterna navegação">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="menu.php">Menu</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="armas.php">Armas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="armaduras.php">Armaduras</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="utilitarios.php">Equipamentos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="habilidades.php">Habilidades</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="classes.php">Classes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="racas.php">Raças</a>
-                </li>
+    if($usuario === 'evandroao' || $usuario === 'arissa' || $usuario === 'gabriel'){
+        ?>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Alterna navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.php">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="armas.php">Armas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="armaduras.php">Armaduras</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="utilitarios.php">Equipamentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="habilidades.php">Habilidades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="classes.php">Classes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="racas.php">Raças</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="estatisticas.php">Estatisticas</a>
+                    </li>
 
-            </ul>
-        </div>
-    </nav>
+                </ul>
+            </div>
+        </nav>
     <?php
-        }
+    }
     ?>
     <nav class="navbar w100">
         <ul class="navbar-nav w100">

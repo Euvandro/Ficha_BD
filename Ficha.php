@@ -43,7 +43,7 @@ $linhaArmadura = mysqli_fetch_assoc($resultadoArmadura);
 <body>
 <header>
     <div class="header-logo">
-        <img src="img/logo.png">
+       <h2>Ficha Online</h2>
     </div>
     <div class="header-texto">
         <h1>Mighty Blade</h1>
@@ -51,7 +51,7 @@ $linhaArmadura = mysqli_fetch_assoc($resultadoArmadura);
 </header>
 <div class="id-bar-user teste">
     <?php
-    if($usuario === 'evandroao'){
+    if($usuario === 'evandroao' || $usuario === 'arissa' || $usuario === 'gabriel'){
         ?>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Alterna navegação">
@@ -80,6 +80,9 @@ $linhaArmadura = mysqli_fetch_assoc($resultadoArmadura);
                     <li class="nav-item">
                         <a class="nav-link" href="racas.php">Raças</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="estatisticas.php">Estatisticas</a>
+                    </li>
 
                 </ul>
             </div>
@@ -100,12 +103,8 @@ $linhaArmadura = mysqli_fetch_assoc($resultadoArmadura);
         <div class="row">
             <div class="col-lg-6">
                 <h3>Personagem</h3>
-                    <label for="imagem">Imagem:</label>
-                    <div class="custom-file mb-3">
-                        <input type="file" accept="image/*" onchange="uploadImage()" class="custom-file-input" name="imagem" id="imagem">
-                        <label class="custom-file-label" id="imgText" for="imagem">Escolha seu arquivo...</label>
-                    </div>
-
+                    <label for="imagem">Link para imagem:</label>
+                        <input type="text" class="form-control mb-3" name="imagem" id="imagem">
 
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" class="form-control mb-3">
